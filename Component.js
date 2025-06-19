@@ -32,7 +32,7 @@ class MyHeader extends HTMLElement {
                   小工具
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">今天吃什麼</a></li>
+                  <li><a class="dropdown-item" href="TodayEat.html">今天吃什麼</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
