@@ -32,8 +32,7 @@ class MyHeader extends HTMLElement {
                   小工具
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">終極密碼</a></li>
-                  <li><a class="dropdown-item" href="#">Bulls and Cows</a></li>
+                  <li><a class="dropdown-item" href="#">今天吃什麼</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -47,8 +46,8 @@ class MyHeader extends HTMLElement {
                   小遊戲
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">終極密碼</a></li>
-                  <li><a class="dropdown-item" href="#">Bulls and Cows</a></li>
+                  <li><a class="dropdown-item" href="GuesstheNumber.html">終極密碼</a></li>
+                  <li><a class="dropdown-item" href="BullsandCows.html">Bulls and Cows</a></li>
                 </ul>
               </li>
             </ul>
