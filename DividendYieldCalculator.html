@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>股票殖利率計算機</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .input-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .input-div {
+        display: flex;
+        flex-wrap: wrap;
+        width: 300px;
+        border: 1px solid #aaa;
+        border-radius: 5%;
+        box-sizing: border-box;
+        padding: 20px;
+      }
+      .input-div label,
+      .input-div button {
+        margin-bottom: 20px;
+      }
+
+      .input-div label span,
+      .input-div p {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .input-div p span {
+        padding: 0 20px;
+        font-weight: bolder;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="Component.js"></script>
+    <my-header></my-header>
+    <section class="container-xxl input-section">
+      <div class="input-div col-12">
+        <label class="col-12">
+          <span>股價</span>
+          <input type="number" id="stockPriceInput" class="form-control" />
+        </label>
+        <label class="col-12">
+          <span>現金股利</span>
+          <input type="number" id="cashDividendInput" class="form-control" />
+        </label>
+        <label class="col-12">
+          <span>股票股利</span>
+          <input type="number" id="stockDividendInput" class="form-control" />
+        </label>
+        <button
+          type="button"
+          class="btn btn-secondary col-12"
+          onclick="onCalcBtnClick()"
+        >
+          計算殖利率
+        </button>
+        <p>除權息後股價試算：<span id="priceAfterDividend"></span>元</p>
+        <p>殖利率試算結果：<span id="yieldResult"></span>%</p>
+      </div>
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      //// 當按下 計算殖利率 按鈕
+      function onCalcBtnClick() {
+        const price =
+          parseFloat(document.getElementById("stockPriceInput").value) || 0;
+        const cash =
+          parseFloat(document.getElementById("cashDividendInput").value) || 0;
+        const stock =
+          parseFloat(document.getElementById("stockDividendInput").value) || 0;
+
+        if (price == 0) {
+          Swal.fire({
+            title: "請輸入股價!!",
+            icon: "error",
+          });
+          return;
+        }
+
+        if (cash == 0 && stock == 0) {
+          Swal.fire({
+            title: "請輸入股利!!",
+            icon: "error",
+          });
+          return;
+        }
+
+        const postExRightsPrice = (price - cash) / (1 + stock / 10);
+        const stockDividendValue = (stock / 10) * postExRightsPrice;
+        const totalYield = ((cash + stockDividendValue) / price) * 100;
+
+        // 顯示結果
+        document.getElementById("priceAfterDividend").textContent =
+          postExRightsPrice.toFixed(2);
+        document.getElementById("yieldResult").textContent =
+          totalYield.toFixed(2);
+      }
+    </script>
+  </body>
+</html>
